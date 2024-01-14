@@ -2,7 +2,7 @@ from account.models import Account, Team
 from django.db import models
 
 
-class Tounament(models.Model):
+class Tournament(models.Model):
     name = models.CharField(max_length=255, default="")
 
     def __str__(self):
@@ -11,7 +11,7 @@ class Tounament(models.Model):
 
 class Round(models.Model):
     name = models.CharField(max_length=255, default="")
-    tournament = models.ForeignKey(Tounament, on_delete=models.CASCADE, null=True)
+    tournament = models.ForeignKey(Tournament, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return self.name
