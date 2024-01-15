@@ -4,7 +4,7 @@ from rest_framework_simplejwt.exceptions import InvalidToken
 from rest_framework_simplejwt.serializers import (TokenObtainPairSerializer,
                                                   TokenRefreshSerializer)
 
-from .models import Account
+from .models import Account, Team
 
 
 class AccountSerializer(serializers.ModelSerializer):
@@ -12,7 +12,15 @@ class AccountSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Account
-        fields = ["username", "role_name"]
+        fields = ["username", "role_name", "team"]
+
+class TeamSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Team
+        fields = ['name', 'members']
+
+    name = serializers.CharField()
+    members = AccountSerializer(many=True)
 
 
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
