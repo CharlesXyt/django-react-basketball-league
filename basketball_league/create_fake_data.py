@@ -3,7 +3,7 @@ def main():
     player_role = Role.objects.get(name='Player')
     coach_role = Role.objects.get(name='Coach')
     league_admin_role = Role.objects.get(name='League Admin')
-    Account.objects.exclude(name='admin').delete()
+    Account.objects.exclude(username='admin').delete()
     Team.objects.all().delete()
     Game.objects.all().delete()
 
@@ -17,9 +17,9 @@ def main():
     league_admin.save()
     for _ in range(16):
         team = Team.objects.create(
-            name=fake.paragraph(nb_sentences=1),
+            name=fake.user_name() + '_team',
         )
-        coach_name = team.name + 'coach'
+        coach_name = team.name + '_coach'
         coach = Account.objects.create(
             username=coach_name,
             name=coach_name,
@@ -32,7 +32,7 @@ def main():
 
 
         for _ in range(10):
-            name = fake.paragraph(nb_sentences=1)
+            name = fake.user_name()
             player = Account.objects.create(
                 username=name,
                 name=name,

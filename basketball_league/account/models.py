@@ -12,6 +12,10 @@ class Team(models.Model):
 class Role(models.Model):
     name = models.CharField(max_length=255, default="")
 
+    player='Player'
+    coach = 'Coach'
+    league_admin = 'League Admin'
+
     def __str__(self):
         return self.name
 

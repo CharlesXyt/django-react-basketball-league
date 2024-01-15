@@ -1,15 +1,15 @@
 from django.shortcuts import render
-from rest_framework import viewsets
 from rest_framework.response import Response
+from rest_framework.views import APIView
 
 from .models import Game
 from .serializer import GameSerializer
 
 
-class GameListViewSet(viewsets.ViewSet):
+class GameListViewSet(APIView):
     queryset = Game.objects.all()
 
-    def list(self, request):
+    def get(self, request):
         tournament = request.query_params.get("tournament")
         if tournament:
             self.queryset = self.queryset.filter(round__tournament=tournament)
