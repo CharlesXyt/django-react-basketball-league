@@ -104,7 +104,7 @@ def create_tournament(fake):
 
 def main():
     fake: Faker = Faker()
-    create_fake_team_users(fake)
+    # create_fake_team_users(fake)
     create_tournament(fake)
  
 if __name__ == "__main__":
