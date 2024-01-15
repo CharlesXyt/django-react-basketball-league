@@ -8,6 +8,6 @@ class UserAdmin(DefaultUserAdmin):
     pass
 
 
-admin.site.register(Account, UserAdmin)
+admin.site.register(Account)
 admin.site.register(Team)
 admin.site.register(Role)
