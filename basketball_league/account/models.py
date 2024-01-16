@@ -8,6 +8,10 @@ class Team(models.Model):
     def __str__(self):
         return self.name
 
+    def get_team_coach(self):
+        coach_account = Account.objects.filter(team=self, role__name="Coach").first()
+        return coach_account
+
 
 class Role(models.Model):
     name = models.CharField(max_length=255, default="")
@@ -30,11 +34,14 @@ class Account(AbstractUser):
     def __str__(self):
         return self.name
 
-    def get_average_score(self):
+    def get_player_match_info(self):
         from game.models import GamePlayerAssociation
 
         game_player_associations = GamePlayerAssociation.objects.filter(player=self)
         if game_player_associations.exists():
             total_score = sum(association.score for association in game_player_associations)
-            return total_score / len(game_player_associations)
-        return 0
+            return {
+                "average_score": round(total_score / len(game_player_associations), 2),
+                "game_count": len(game_player_associations),
+            }
+        return {"average_score": 0, "game_count": 0}

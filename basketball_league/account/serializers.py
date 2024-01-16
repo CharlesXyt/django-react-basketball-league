@@ -1,8 +1,7 @@
 from django.conf import settings
 from rest_framework import serializers
 from rest_framework_simplejwt.exceptions import InvalidToken
-from rest_framework_simplejwt.serializers import (TokenObtainPairSerializer,
-                                                  TokenRefreshSerializer)
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer, TokenRefreshSerializer
 
 from .models import Account, Role, Team
 
@@ -15,23 +14,36 @@ class RoleSerializer(serializers.ModelSerializer):
 
 class AccountSerializer(serializers.ModelSerializer):
     role = RoleSerializer()
-    average_score = serializers.SerializerMethodField()
+    player_match_info = serializers.SerializerMethodField()
+    team = serializers.SerializerMethodField()
 
     class Meta:
         model = Account
-        fields = ["username", "role", "team", "email", "average_score"]
+        fields = ["name", "role", "team", "email", "player_match_info"]
 
-    def get_average_score(self, obj):
-        return obj.get_average_score()
+    def get_player_match_info(self, obj):
+        return obj.get_player_match_info()
+
+    def get_team(self, obj):
+        team_instance = obj.team
+        if team_instance:
+            return {"id": team_instance.id, "name": team_instance.name}
+        else:
+            return None
 
 
 class TeamSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Team
-        fields = ["name", "members"]
-
     name = serializers.CharField()
     members = AccountSerializer(many=True)
+    coach = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Team
+        fields = ["id", "name", "members", "coach"]
+
+    def get_coach(self, obj):
+        coach = obj.get_team_coach()
+        return {"id": coach.id, "name": coach.name}
 
 
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):

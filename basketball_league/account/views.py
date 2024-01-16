@@ -4,15 +4,19 @@ from rest_framework.exceptions import PermissionDenied
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework_simplejwt.views import (TokenObtainPairView,
-                                            TokenRefreshView)
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 from .models import Account, Role, Team
 from .permissions import IsCoach, IsCoachOrLeagueAdmin
-from .serializers import (AccountSerializer, CustomTokenObtainPairSerializer,
-                          JWTCookieTokenRefreshSerializer, TeamSerializer)
+from .serializers import (
+    AccountSerializer,
+    CustomTokenObtainPairSerializer,
+    JWTCookieTokenRefreshSerializer,
+    TeamSerializer,
+)
 
 # Create your views here.
+
 
 class AccountView(APIView):
     queryset = Account.objects.all()
@@ -20,41 +24,43 @@ class AccountView(APIView):
 
     def get(self, request):
         current_user = request.user
-        user_id = request.query_params.get("user_id")        
+        user_id = request.query_params.get("user_id")
 
         if user_id and user_id != current_user.id:
             if current_user.role.name == Role.player:
-                raise PermissionDenied('You cannot access other user information')
+                raise PermissionDenied("You cannot access other user information")
             elif current_user.role.name == Role.coach:
                 self.queryset = self.queryset.filter(team=current_user.team).get(id=user_id)
                 if not self.queryset:
-                    raise PermissionDenied('You cannot access this user information')
+                    raise PermissionDenied("You cannot access this user information")
             else:
                 self.queryset = self.queryset.get(id=user_id)
         else:
             self.queryset = self.queryset.get(id=current_user.id)
-        
+
         serializer = AccountSerializer(self.queryset)
         return Response(serializer.data)
-    
+
 
 class TeamView(APIView):
     queryset = Team.objects.all()
     permission_classes = [IsAuthenticated, IsCoachOrLeagueAdmin]
+
     def get(self, request):
         current_user = request.user
         team_id = request.query_params.get("team_id")
 
-        if current_user.role == Role.league_admin:
+        if current_user.role.name == Role.league_admin:
             self.queryset = self.queryset.get(id=team_id)
         elif not team_id or team_id == current_user.team.id:
             self.queryset = self.queryset.get(id=current_user.team.id)
         else:
-            raise PermissionDenied('You cannot access other team information')
+            raise PermissionDenied("You cannot access other team information")
 
         serializer = TeamSerializer(self.queryset)
-        return Response(serializer.data) 
-    
+        return Response(serializer.data)
+
+
 class JWTSetCookieMixin:
     def finalize_response(self, request, response, *args, **kwargs):
         if response.data.get("refresh"):

@@ -1,13 +1,25 @@
-export enum UserRole {
-    Player = 'Player',
-    LeagueAdmin = 'League Admin',
-    Coach = 'Coach',
+import { UserRoleEnum } from '../Enums/enum'
+export interface Team {
+  id: number
+  name: string
+}
+
+export interface UserRole {
+  id: number
+  name: UserRoleEnum
 }
 
 export interface UserDetailData {
-    username: string,
-    email: string,
-    role: UserRole,
-    averageScore?: number,
-    team?: string
+  name: string
+  email: string
+  role: UserRole
+  playerMatchInfo?: { averageScore: number; gameCount: number }
+  team?: Team
+}
+
+export interface TeamDetail {
+  id: number
+  name: string
+  coach: UserDetailData
+  members: UserDetailData[]
 }
