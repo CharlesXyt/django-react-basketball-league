@@ -72,24 +72,30 @@ def create_tournament(fake):
                 round=round_obj,
                 location=fake.sentence(nb_words=1) + ' location'
             )
-            team_1_player = [(member, random.randint(0, 4)) for member in team_1.members.all() if member.role.name == Role.player]
-            team_2_player = [(member, random.randint(0, 4)) for member in team_2.members.all() if member.role.name == Role.player]
-            score_team1 = 0
-            score_team2 = 0
+            team_1_player = [[member, random.randint(0, 4)] for member in team_1.members.all() if member.role.name == Role.player]
+            team_2_player = [[member, random.randint(0, 4)] for member in team_2.members.all() if member.role.name == Role.player]
+            scores_team_1 = [player[1] for player in team_1_player]
+            scores_team_2 = [player[1] for player in team_2_player]
+
+            score_team1 = sum(scores_team_1)
+            score_team2 = sum(scores_team_2)
+
+            if score_team1 == score_team2:
+                team_2_player[-1][-1] += 1
+                score_team2 += 1
+
             for player, score in team_1_player:
                 GamePlayerAssociation.objects.create(
                     game=game,
                     player=player,
                     score=score
                 )
-                score_team1 += score
             for player, score in team_2_player:
                 GamePlayerAssociation.objects.create(
                     game=game,
                     player=player,
                     score=score
                 )
-                score_team2 += score
             GameTeamAssociation.objects.create(
                 game=game,
                 team=team_1,

@@ -33,6 +33,7 @@ const TeamCard = ({ teamScoreDetail }: { teamScoreDetail: TeamScoreInfo }) => {
                 justifyContent: 'center',
                 width: '250px',
                 height: '150px',
+                bgcolor: teamScoreDetail['isWinner'] ? 'palegreen' : 'lightsalmon'
             }}
             onClick={handleClick}
         >

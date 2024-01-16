@@ -4,16 +4,13 @@ from rest_framework.exceptions import PermissionDenied
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+from rest_framework_simplejwt.views import (TokenObtainPairView,
+                                            TokenRefreshView)
 
 from .models import Account, Role, Team
 from .permissions import IsCoach, IsCoachOrLeagueAdmin
-from .serializers import (
-    AccountSerializer,
-    CustomTokenObtainPairSerializer,
-    JWTCookieTokenRefreshSerializer,
-    TeamSerializer,
-)
+from .serializers import (AccountSerializer, CustomTokenObtainPairSerializer,
+                          JWTCookieTokenRefreshSerializer, TeamSerializer)
 
 # Create your views here.
 
@@ -24,7 +21,7 @@ class AccountView(APIView):
 
     def get(self, request):
         current_user = request.user
-        user_id = request.query_params.get("user_id")
+        user_id = int(request.query_params.get("user_id"))
 
         if user_id and user_id != current_user.id:
             if current_user.role.name == Role.player:
@@ -48,7 +45,7 @@ class TeamView(APIView):
 
     def get(self, request):
         current_user = request.user
-        team_id = request.query_params.get("team_id")
+        team_id = int(request.query_params.get("team_id"))
 
         if current_user.role.name == Role.league_admin:
             self.queryset = self.queryset.get(id=team_id)

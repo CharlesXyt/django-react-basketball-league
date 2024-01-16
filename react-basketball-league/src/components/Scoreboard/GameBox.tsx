@@ -13,7 +13,7 @@ const GameBox = ({ game }: { game: any }) => {
                     padding: '20px',
                 }}
             >
-                <Box sx={{}}>
+                <Box>
                     <TeamCard teamScoreDetail={game.teamScoreInfo[0]} />
                 </Box>
                 <Typography variant="h2">vs</Typography>

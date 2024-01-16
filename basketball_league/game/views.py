@@ -17,7 +17,7 @@ class GameListViewSet(APIView):
 
     def get(self, request):
         current_user = request.user
-        game_id = request.query_params.get("game_id")
+        game_id = int(request.query_params.get("game_id"))
         try:
             game_instance = self.queryset.get(id=game_id)
         except Game.DoesNotExist:
@@ -37,7 +37,7 @@ class ScoreBoardListViewSet(APIView):
     queryset = Game.objects
 
     def get(self, request):
-        round_id = request.query_params.get('round_id')
+        round_id = int(request.query_params.get('round_id'))
         if round_id:
             self.queryset = self.queryset.filter(round=round_id)
         serializer = ScoreBoardSerializer(self.queryset, many=True)
