@@ -72,8 +72,8 @@ def create_tournament(fake):
                 round=round_obj,
                 location=fake.sentence(nb_words=1) + ' location'
             )
-            team_1_player = [[member, random.randint(0, 4)] for member in team_1.members.all() if member.role.name == Role.player]
-            team_2_player = [[member, random.randint(0, 4)] for member in team_2.members.all() if member.role.name == Role.player]
+            team_1_player = random.sample([[member, random.randint(0, 4)] for member in team_1.members.all() if member.role.name == Role.player], 8)
+            team_2_player = random.sample([[member, random.randint(0, 4)] for member in team_2.members.all() if member.role.name == Role.player], 8)
             scores_team_1 = [player[1] for player in team_1_player]
             scores_team_2 = [player[1] for player in team_2_player]
 
