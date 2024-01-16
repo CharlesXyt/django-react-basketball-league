@@ -3,16 +3,16 @@ import { useAuthServiceContext } from '../context/AuthContext'
 import { useNavigate } from 'react-router-dom'
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
-  const { isLoggedIn } = useAuthServiceContext()
-  const navigate = useNavigate()
+    const { isLoggedIn } = useAuthServiceContext()
+    const navigate = useNavigate()
 
-  useEffect(() => {
-    if (!isLoggedIn) {
-      navigate('/login')
-    }
-  }, [isLoggedIn])
+    useEffect(() => {
+        if (!isLoggedIn) {
+            navigate('/login')
+        }
+    }, [isLoggedIn])
 
-  return <>{children}</>
+    return <>{children}</>
 }
 
 export default ProtectedRoute

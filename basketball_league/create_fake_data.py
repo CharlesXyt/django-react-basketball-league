@@ -55,13 +55,14 @@ def create_tournament(fake):
         name=fake.sentence(nb_words=2) + ' touranment'
     )
     teams_left = [team for team in Team.objects.prefetch_related('members').all()]
-    current_round = 1
+    round_names = ["First Round", "Second Round", "Semi Final", "Final"]
+    current_round = 0
     while len(teams_left) > 1:
 
         matches = generate_match(teams_left)
         teams_left = []
         round_obj = Round.objects.create(
-            name="round-" + str(current_round),
+            name=round_names[current_round],
             tournament=tournament
         )
         current_round += 1
@@ -71,8 +72,8 @@ def create_tournament(fake):
                 round=round_obj,
                 location=fake.sentence(nb_words=1) + ' location'
             )
-            team_1_player = [(member, random.randint(0, 2)) for member in team_1.members.all() if member.role.name == Role.player]
-            team_2_player = [(member, random.randint(0, 2)) for member in team_2.members.all() if member.role.name == Role.player]
+            team_1_player = [(member, random.randint(0, 4)) for member in team_1.members.all() if member.role.name == Role.player]
+            team_2_player = [(member, random.randint(0, 4)) for member in team_2.members.all() if member.role.name == Role.player]
             score_team1 = 0
             score_team2 = 0
             for player, score in team_1_player:

@@ -9,42 +9,42 @@ import ScoreDashboard from './pages/Scoreboard'
 import TeamDetail from './pages/TeamDetail'
 
 const App: React.FC = () => {
-  const theme = createMuiTheme()
-  return (
-    <BrowserRouter>
-      <AuthServiceProvider>
-        <ThemeProvider theme={theme}>
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <ProtectedRoute>
-                  <ScoreDashboard />
-                </ProtectedRoute>
-              }
-            />
-            <Route path="/login" element={<Login />} />
-            <Route
-              path="/profile"
-              element={
-                <ProtectedRoute>
-                  <Profile />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/team"
-              element={
-                <ProtectedRoute>
-                  <TeamDetail />
-                </ProtectedRoute>
-              }
-            />
-          </Routes>
-        </ThemeProvider>
-      </AuthServiceProvider>
-    </BrowserRouter>
-  )
+    const theme = createMuiTheme()
+    return (
+        <BrowserRouter>
+            <AuthServiceProvider>
+                <ThemeProvider theme={theme}>
+                    <Routes>
+                        <Route
+                            path="/"
+                            element={
+                                <ProtectedRoute>
+                                    <ScoreDashboard />
+                                </ProtectedRoute>
+                            }
+                        />
+                        <Route path="/login" element={<Login />} />
+                        <Route
+                            path="/profile"
+                            element={
+                                <ProtectedRoute>
+                                    <Profile />
+                                </ProtectedRoute>
+                            }
+                        />
+                        <Route
+                            path="/team"
+                            element={
+                                <ProtectedRoute>
+                                    <TeamDetail />
+                                </ProtectedRoute>
+                            }
+                        />
+                    </Routes>
+                </ThemeProvider>
+            </AuthServiceProvider>
+        </BrowserRouter>
+    )
 }
 
 export default App
