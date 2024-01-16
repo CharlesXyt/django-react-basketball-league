@@ -1,7 +1,8 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 import { API_BASE_URL } from '../config';
 import { AuthServiceProps } from '../types/AuthService';
 import axios from 'axios';
+import { UserDetailData } from '../types/UserProfile';
 
 
 
@@ -15,6 +16,7 @@ const AuthServiceProvider = (props: React.PropsWithChildren) => {
             return false
         }
     });
+    const [userProfile, setUserProfile] = useState<UserDetailData | null>(null)
 
     const login = async (username: string, password: string) => {
         try {
@@ -32,11 +34,35 @@ const AuthServiceProvider = (props: React.PropsWithChildren) => {
         setIsLoggedIn(false)
     }
 
+    useEffect(() => {
+        const getUserProfile = async () => {
+            try {
+                const response = await axios.get(API_BASE_URL + '/account', { withCredentials: true })
+                const userProfile = response.data
+                setUserProfile(
+                    {
+                        username: userProfile.username,
+                        email: userProfile.email,
+                        role: userProfile.roleName,
+                        averageScore: userProfile.averageScore,
+                        team: userProfile.team
+                    }
+                )
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        if (isLoggedIn) {
+            getUserProfile()
+        }
+    }, [isLoggedIn])
+
     return (
         <AuthServiceContext.Provider value={{
             isLoggedIn,
             login,
-            logout
+            logout,
+            userProfile
         }}>
             {props.children}
         </AuthServiceContext.Provider>

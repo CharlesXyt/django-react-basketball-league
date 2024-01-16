@@ -16,7 +16,7 @@ const ScoreBoard = () => {
 
     const jwtAxios = useAxiosWithInterceptor()
 
-    const handleChange = (event: React.SyntheticEvent, newRound: number) => {
+    const handleChange = (_event: React.SyntheticEvent, newRound: number) => {
         setCurrentRound(newRound);
     };
 
