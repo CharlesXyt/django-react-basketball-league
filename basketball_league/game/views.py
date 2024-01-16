@@ -8,10 +8,10 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from .models import Game, Round
-from .serializer import GameSerializer, RoundSerializer, ScoreBoardSerializer
+from .serializers import GameSerializer, RoundSerializer, ScoreBoardSerializer
 
 
-class GameListViewSet(APIView):
+class GameView(APIView):
     permission_classes = [IsAuthenticated, IsCoachOrLeagueAdmin]
     queryset = Game.objects.all()
 
@@ -32,19 +32,19 @@ class GameListViewSet(APIView):
         return Response(serializer.data)
 
 
-class ScoreBoardListViewSet(APIView):
+class ScoreBoardView(APIView):
     permission_classes = [IsAuthenticated]
     queryset = Game.objects
 
     def get(self, request):
-        round_id = int(request.query_params.get('round_id'))
+        round_id = request.query_params.get('round_id')
         if round_id:
-            self.queryset = self.queryset.filter(round=round_id)
+            self.queryset = self.queryset.filter(round=int(round_id))
         serializer = ScoreBoardSerializer(self.queryset, many=True)
         return Response(serializer.data)
     
 
-class RoundListViewSet(APIView):
+class RoundView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request):

@@ -1,5 +1,4 @@
 from django.conf import settings
-from django.shortcuts import render
 from rest_framework.exceptions import PermissionDenied
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -8,7 +7,7 @@ from rest_framework_simplejwt.views import (TokenObtainPairView,
                                             TokenRefreshView)
 
 from .models import Account, Role, Team
-from .permissions import IsCoach, IsCoachOrLeagueAdmin
+from .permissions import IsCoachOrLeagueAdmin
 from .serializers import (AccountSerializer, CustomTokenObtainPairSerializer,
                           JWTCookieTokenRefreshSerializer, TeamSerializer)
 

@@ -1,9 +1,9 @@
 from django.urls import path
 
-from .views import GameListViewSet, RoundListViewSet, ScoreBoardListViewSet
+from .views import GameView, RoundView, ScoreBoardView
 
 urlpatterns = [
-    path("api/game", GameListViewSet.as_view()),
-    path("api/scoreboard", ScoreBoardListViewSet.as_view()),
-    path("api/round", RoundListViewSet.as_view())
+    path("api/game", GameView.as_view(), name="game"),
+    path("api/scoreboard", ScoreBoardView.as_view(), name="score_board"),
+    path("api/round", RoundView.as_view(), name="round")
 ]
