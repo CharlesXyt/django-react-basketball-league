@@ -1,5 +1,6 @@
 import { useTheme } from "@mui/material/styles";
 import { Box } from "@mui/material";
+import Menu from "../../components/Menu";
 
 const Drawer = () => {
     const theme = useTheme();
@@ -14,7 +15,7 @@ const Drawer = () => {
                 sm: "block"
             }
         }}>
-            asdasdasd
+            <Menu />
         </Box>
     )
 }

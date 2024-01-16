@@ -1,11 +1,14 @@
-import { AppBar, Box, Drawer, IconButton, Link, Toolbar, Typography, useMediaQuery } from "@mui/material";
+import { AppBar, Box, Button, Drawer, IconButton, Link, Toolbar, Typography, useMediaQuery } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useEffect, useState } from "react";
+import { useAuthServiceContext } from "../../context/AuthContext";
+import Menu from "../../components/Menu";
 
 const PrimaryAppBar = () => {
     const theme = useTheme();
     const [sideMenu, setSideMenu] = useState(false);
+    const { logout } = useAuthServiceContext();
 
     const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"))
 
@@ -18,7 +21,6 @@ const PrimaryAppBar = () => {
     return (
         <AppBar
             sx={{
-                zIndex: (theme) => theme.zIndex.drawer + 1,
                 backgroundColor: theme.palette.background.default,
                 borderBottom: `1px solid ${theme.palette.divider}`
             }}
@@ -52,7 +54,7 @@ const PrimaryAppBar = () => {
                         paddingTop: `${theme.primaryAppBar.height}px`,
                         minWidth: `${theme.draw.width}px`
                     }}>
-                        asdasda
+                        <Menu />
                     </Box>
                 </Drawer>
 
@@ -71,6 +73,10 @@ const PrimaryAppBar = () => {
                         Basketball League
                     </Typography>
                 </Link>
+                <Box sx={{ flexGrow: 1, display: "flex", justifyContent: "flex-end" }}>
+                    <Button color="primary" onClick={() => logout()}>Logout</Button>
+                </Box>
+
             </Toolbar>
         </AppBar>
     )

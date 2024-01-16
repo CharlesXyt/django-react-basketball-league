@@ -4,20 +4,31 @@ from rest_framework_simplejwt.exceptions import InvalidToken
 from rest_framework_simplejwt.serializers import (TokenObtainPairSerializer,
                                                   TokenRefreshSerializer)
 
-from .models import Account, Team
+from .models import Account, Role, Team
+
+
+class RoleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Role
+        fields = "__all__"
 
 
 class AccountSerializer(serializers.ModelSerializer):
-    role_name = serializers.CharField(source="role.name", read_only=True)
+    role = RoleSerializer()
+    average_score = serializers.SerializerMethodField()
 
     class Meta:
         model = Account
-        fields = ["username", "role_name", "team"]
+        fields = ["username", "role", "team", "email", "average_score"]
+
+    def get_average_score(self, obj):
+        return obj.get_average_score()
+
 
 class TeamSerializer(serializers.ModelSerializer):
     class Meta:
         model = Team
-        fields = ['name', 'members']
+        fields = ["name", "members"]
 
     name = serializers.CharField()
     members = AccountSerializer(many=True)

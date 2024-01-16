@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     "rest_framework",
     "corsheaders",
     "account",
-    "management_system",
     "game",
 ]
 
@@ -133,9 +132,7 @@ AUTH_USER_MODEL = "account.Account"
 
 REST_FRAMEWORK = {
     # YOUR SETTINGS
-    "DEFAULT_AUTHENTICATION_CLASSES": [
-        "account.authenticate.JWTCookieAuthentication"
-    ],
+    "DEFAULT_AUTHENTICATION_CLASSES": ["account.authenticate.JWTCookieAuthentication"],
 }
 
 
@@ -148,8 +145,7 @@ AUTH_PASSWORD_VALIDATORS = []
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(days=1),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=30),
-
     "ACCESS_TOKEN_NAME": "access_token",
     "REFRESH_TOKEN_NAME": "refresh_token",
-    "JWT_COOKIE_SAMESITE": "Lax"
+    "JWT_COOKIE_SAMESITE": "Lax",
 }
