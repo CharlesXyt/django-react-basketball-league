@@ -15,7 +15,9 @@ class Round(models.Model):
 
     def __str__(self):
         return self.name
-
+    
+    def get_game_count(self):
+        return self.game_set.count()
 
 class Game(models.Model):
     name = models.CharField(max_length=255, default="")
@@ -27,18 +29,32 @@ class Game(models.Model):
 
     def __str__(self):
         return self.name
-
+    
     def get_team_scores(self):
-        team_scores = {}
+        team_scores = []
         for team_assoc in self.gameteamassociation_set.all():
-            team_name = team_assoc.team.name
-            team_scores[team_name] = {"score": team_assoc.score, "players": self.get_players_for_team(team_assoc.team)}
+            team = team_assoc.team
+            team_scores.append({"score": team_assoc.score, "team_id": team.id, "name": team.name, "is_winner": False})
+
+        winner_team = max(team_scores, key=lambda x: x["score"])
+        winner_team["is_winner"] = True
         return team_scores
 
-    def get_players_for_team(self, team):
-        players = {}
+    def get_team_score_detail(self):
+        team_scores = []
+        for team_assoc in self.gameteamassociation_set.all():
+            team = team_assoc.team
+            team_scores.append({
+                "score": team_assoc.score, "team_id": team.id, "name": team.name, 
+                "players": self.get_player_detail(team_assoc.team)}
+                )
+        return team_scores
+
+    def get_player_detail(self, team):
+        players = []
         for player_assoc in self.gameplayerassociation_set.filter(player__team=team):
-            players[player_assoc.player.username] = player_assoc.score
+            player = player_assoc.player
+            players.append({"score": player_assoc.score, "player_id": player.id, "name": player.username})
         return players
 
 

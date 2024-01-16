@@ -1,4 +1,3 @@
-import { useTheme } from "@mui/material/styles";
 import UserProfile from "./templates/UserProfile";
 import { UserDetailData } from "../types/UserProfile";
 import { useEffect, useState } from "react";
@@ -9,24 +8,23 @@ import LoadingSpinner from "../components/LoadingSpinner";
 
 
 const Profile = () => {
-    const theme = useTheme()
     const [userProfile, setUserProfile] = useState<UserDetailData | null>(null)
     const [isLoading, setIsLoading] = useState(false);
 
-    const jtwAxios = useAxiosWithInterceptor()
+    const jwtAxios = useAxiosWithInterceptor()
 
     useEffect(() => {
         const getUserProfile = async () => {
             setIsLoading(true);
             try {
-                const response = await jtwAxios.get(API_BASE_URL + '/account', { withCredentials: true })
+                const response = await jwtAxios.get(API_BASE_URL + '/account', { withCredentials: true })
                 const userProfile = response.data
                 setUserProfile(
                     {
                         username: userProfile.username,
                         email: userProfile.email,
-                        role: userProfile.role_name,
-                        averageScore: userProfile.average_score,
+                        role: userProfile.roleName,
+                        averageScore: userProfile.averageScore,
                         team: userProfile.team
                     }
                 )
@@ -35,8 +33,6 @@ const Profile = () => {
             } finally {
                 setIsLoading(false);
             }
-
-
         }
         getUserProfile()
     }, [])

@@ -1,12 +1,13 @@
+import ScoreBoard from "./templates/Scoreboard";
 import AppWrapper from "./templates/AppWrapper";
 
 
-const ScoreDashboard = () => {
+const ScoreDashboardContainer = () => {
     return (
         <AppWrapper>
-            <p>test</p>
+            <ScoreBoard />
         </AppWrapper>
     );
 };
 
-export default ScoreDashboard;
+export default ScoreDashboardContainer;

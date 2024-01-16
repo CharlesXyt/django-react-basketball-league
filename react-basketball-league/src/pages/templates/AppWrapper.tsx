@@ -6,12 +6,12 @@ const AppWrapper = ({ children }: { children: React.ReactNode }) => {
     const theme = useTheme();
     return (
         <Box sx={{
-            display: "flex"
+            display: "flex",
         }}>
             <CssBaseline />
             <PrimaryAppBar />
             <Drawer />
-            <Box sx={{ pt: `${theme.primaryAppBar.height}px}`, flexBasis: "100%" }}>
+            <Box sx={{ display: "flex", pt: `${theme.primaryAppBar.height}px`, width: '100%', maxHeight: "100vh", overflow: "auto" }}>
                 {children}
             </Box>
         </Box>

@@ -2,6 +2,7 @@ import axios, { AxiosInstance } from "axios";
 import { useNavigate } from "react-router-dom";
 import { API_BASE_URL } from "../config";
 import { useAuthServiceContext } from "../context/AuthContext";
+import camelcaseKeys from "camelcase-keys";
 
 
 const useAxiosWithInterceptor = (): AxiosInstance => {
@@ -11,6 +12,7 @@ const useAxiosWithInterceptor = (): AxiosInstance => {
 
     jwtAxios.interceptors.response.use(
         (response) => {
+            response.data = camelcaseKeys(response.data, { deep: true })
             return response
         },
         async (error) => {
