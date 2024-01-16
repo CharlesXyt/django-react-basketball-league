@@ -31,6 +31,10 @@ const UserInfo: React.FC<{ user: UserDetailData }> = ({ user }) => {
                 flexDirection: 'column',
                 justifyContent: 'center',
                 minWidth: '400px',
+                cursor: 'pointer',
+                '&:hover': {
+                    transform: 'scale(1.05)',
+                }
             }}
             onClick={handleClick}
         >

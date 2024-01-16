@@ -21,7 +21,7 @@ class AccountView(APIView):
 
     def get(self, request):
         current_user = request.user
-        user_id = int(request.query_params.get("user_id"))
+        user_id = request.query_params.get("user_id")
 
         if user_id and user_id != current_user.id:
             if current_user.role.name == Role.player:
