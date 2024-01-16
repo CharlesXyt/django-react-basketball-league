@@ -1,20 +1,21 @@
+from account.factory.account_factory import AccountFactory, RoleFactory
+from account.models import Role
+from account.permissions import IsCoach, IsCoachOrLeagueAdmin, IsLeagueAdmin
 from django.test import RequestFactory, TestCase
-
-from .factory.account_factory import AccountFactory
-from .models import Role
-from .permissions import IsCoach, IsCoachOrLeagueAdmin, IsLeagueAdmin
 
 
 class PermissionsTests(TestCase):
     def setUp(self):
         self.factory = RequestFactory()
-
-        self.player_user = AccountFactory.create_with_role(Role.player)
-        self.coach_user = AccountFactory.create_with_role(Role.coach)
-        self.league_admin_user = AccountFactory.create_with_role(Role.league_admin)
+        player_role = RoleFactory(name=Role.player)
+        coach_role = RoleFactory(name=Role.coach)
+        league_admin_role = RoleFactory(name=Role.league_admin)
+        self.player_user = AccountFactory(role=player_role)
+        self.coach_user = AccountFactory(role=coach_role)
+        self.league_admin_user = AccountFactory(role=league_admin_role)
 
         # Create a request object
-        self.request = self.factory.get('/')
+        self.request = self.factory.get("/")
 
     def test_is_coach_permission(self):
         # Assign the IsCoach permission to the user

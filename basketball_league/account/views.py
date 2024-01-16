@@ -27,7 +27,7 @@ class AccountView(APIView):
             if current_user.role.name == Role.player:
                 raise PermissionDenied("You cannot access other user information")
             elif current_user.role.name == Role.coach:
-                self.queryset = self.queryset.filter(team=current_user.team).get(id=user_id)
+                self.queryset = self.queryset.filter(team__id=current_user.team.id, id=user_id).first()
                 if not self.queryset:
                     raise PermissionDenied("You cannot access this user information")
             else:
