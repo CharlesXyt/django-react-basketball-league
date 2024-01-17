@@ -1,40 +1,40 @@
-import { Box, Button, Container, TextField, Typography } from '@mui/material'
-import { useFormik } from 'formik'
-import { useNavigate } from 'react-router-dom'
-import { useAuthServiceContext } from '../context/AuthContext'
+import { Box, Button, Container, TextField, Typography } from '@mui/material';
+import { useFormik } from 'formik';
+import { useNavigate } from 'react-router-dom';
+import { useAuthServiceContext } from '../context/AuthContext';
 
 const Login = () => {
-    const { login } = useAuthServiceContext()
-    const navigate = useNavigate()
+    const { login } = useAuthServiceContext();
+    const navigate = useNavigate();
     const formik = useFormik({
         initialValues: {
             username: '',
             password: '',
         },
         validate: (values) => {
-            const errors: Partial<typeof values> = {}
+            const errors: Partial<typeof values> = {};
             if (!values.username) {
-                errors.username = 'Required'
+                errors.username = 'Required';
             }
             if (!values.password) {
-                errors.password = 'Required'
+                errors.password = 'Required';
             }
-            return errors
+            return errors;
         },
         onSubmit: async (values) => {
-            const { username, password } = values
-            const status = await login(username, password)
+            const { username, password } = values;
+            const status = await login(username, password);
             if (status === 401) {
-                console.log('Unauthorised')
+                console.log('Unauthorised');
                 formik.setErrors({
                     username: 'Invalid username or password',
                     password: 'Invalid username or password',
-                })
+                });
             } else {
-                navigate('/')
+                navigate('/');
             }
         },
-    })
+    });
     return (
         <Container component="main" maxWidth="xs">
             <Box
@@ -105,7 +105,7 @@ const Login = () => {
                 </Box>
             </Box>
         </Container>
-    )
-}
+    );
+};
 
-export default Login
+export default Login;

@@ -1,9 +1,9 @@
-import { useTheme } from '@mui/material/styles'
-import { Box } from '@mui/material'
-import Menu from '../../components/Menu'
+import { useTheme } from '@mui/material/styles';
+import { Box } from '@mui/material';
+import Menu from '../../components/Menu';
 
 const Drawer = () => {
-    const theme = useTheme()
+    const theme = useTheme();
     return (
         <Box
             sx={{
@@ -19,7 +19,7 @@ const Drawer = () => {
         >
             <Menu />
         </Box>
-    )
-}
+    );
+};
 
-export default Drawer
+export default Drawer;

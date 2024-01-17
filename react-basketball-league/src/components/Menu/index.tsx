@@ -4,8 +4,8 @@ import {
     ListItemButton,
     ListItemText,
     Typography,
-} from '@mui/material'
-import { Link } from 'react-router-dom'
+} from '@mui/material';
+import { Link } from 'react-router-dom';
 
 const Menu = () => {
     const menu = [
@@ -17,7 +17,7 @@ const Menu = () => {
             name: 'Profile',
             link: 'profile',
         },
-    ]
+    ];
     return (
         <List sx={{ py: 0 }}>
             {menu.map((item) => (
@@ -48,7 +48,7 @@ const Menu = () => {
                 </ListItem>
             ))}
         </List>
-    )
-}
+    );
+};
 
-export default Menu
+export default Menu;

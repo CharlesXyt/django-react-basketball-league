@@ -1,16 +1,18 @@
-import AppWrapper from './templates/AppWrapper'
-import LoadingSpinner from '../components/LoadingSpinner'
-import { useAuthServiceContext } from '../context/AuthContext'
-import { Avatar, Box, Card, Typography } from '@mui/material'
-import { useLocation } from 'react-router-dom'
+import AppWrapper from './templates/AppWrapper';
+import LoadingSpinner from '../components/LoadingSpinner';
+import { useAuthServiceContext } from '../context/AuthContext';
+import { Avatar, Box, Card, Typography } from '@mui/material';
+import { useLocation } from 'react-router-dom';
+import { useTheme } from '@mui/material/styles';
 
 const Profile = () => {
-    const { userProfile } = useAuthServiceContext()
-    const location = useLocation()
+    const theme = useTheme();
+    const { userProfile } = useAuthServiceContext();
+    const location = useLocation();
 
-    let userInfo = location.state?.userProfile ?? userProfile
+    let userInfo = location.state?.userProfile ?? userProfile;
 
-    if (userInfo == null) return <LoadingSpinner />
+    if (userInfo == null) return <LoadingSpinner />;
 
     return (
         <AppWrapper>
@@ -18,21 +20,21 @@ const Profile = () => {
                 sx={{
                     display: 'flex',
                     flexDirection: 'column',
-                    mt: '30px',
+                    mt: theme.spacing(3),
                     width: '100%',
                 }}
             >
                 <Typography variant="h5" textAlign={'center'} gutterBottom>
                     Profile
                 </Typography>
-                <Card sx={{ margin: '20px', padding: '20px' }}>
+                <Card sx={{ margin: theme.spacing(2), padding: theme.spacing(2) }}>
                     <Avatar
                         sx={{
                             width: '100px',
                             height: '100px',
                             textAlign: 'center',
                             margin: 'auto',
-                            mb: '40px',
+                            mb: theme.spacing(4),
                             fontSize: '50px',
                         }}
                     >
@@ -67,7 +69,7 @@ const Profile = () => {
                 </Card>
             </Box>
         </AppWrapper>
-    )
-}
+    );
+};
 
-export default Profile
+export default Profile;

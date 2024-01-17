@@ -5,7 +5,10 @@ interface NotificationProps {
     message: string;
     duration?: number;
 }
-const Notification: React.FC<NotificationProps> = ({ message, duration = 2000 }) => {
+const Notification: React.FC<NotificationProps> = ({
+    message,
+    duration = 2000,
+}) => {
     const [open, setOpen] = useState(true);
 
     useEffect(() => {
@@ -19,7 +22,10 @@ const Notification: React.FC<NotificationProps> = ({ message, duration = 2000 })
     }, [duration]);
 
     return open ? (
-        <Alert severity="warning" sx={{ position: 'fixed', bottom: '20px', right: '40px' }}>
+        <Alert
+            severity="warning"
+            sx={{ position: 'fixed', bottom: '20px', right: '40px' }}
+        >
             {message}
         </Alert>
     ) : null;

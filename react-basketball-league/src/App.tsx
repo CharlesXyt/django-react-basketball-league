@@ -1,15 +1,15 @@
-import { Route, BrowserRouter, Routes, Navigate } from 'react-router-dom'
-import Profile from './pages/Profile'
-import { ThemeProvider } from '@emotion/react'
-import { createMuiTheme } from './theme/theme'
-import Login from './pages/Login'
-import { AuthServiceProvider } from './context/AuthContext'
-import ProtectedRoute from './services/ProtectedRoute'
-import ScoreDashboard from './pages/Scoreboard'
-import TeamDetail from './pages/TeamDetail'
+import { Route, BrowserRouter, Routes, Navigate } from 'react-router-dom';
+import Profile from './pages/Profile';
+import { ThemeProvider } from '@emotion/react';
+import { createMuiTheme } from './theme/theme';
+import Login from './pages/Login';
+import { AuthServiceProvider } from './context/AuthContext';
+import ProtectedRoute from './services/ProtectedRoute';
+import ScoreDashboard from './pages/Scoreboard';
+import TeamDetail from './pages/TeamDetail';
 
 const App: React.FC = () => {
-    const theme = createMuiTheme()
+    const theme = createMuiTheme();
     return (
         <BrowserRouter>
             <AuthServiceProvider>
@@ -45,7 +45,7 @@ const App: React.FC = () => {
                 </ThemeProvider>
             </AuthServiceProvider>
         </BrowserRouter>
-    )
-}
+    );
+};
 
-export default App
+export default App;

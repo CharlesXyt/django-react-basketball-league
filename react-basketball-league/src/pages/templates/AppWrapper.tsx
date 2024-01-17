@@ -1,9 +1,9 @@
-import { Box, CssBaseline } from '@mui/material'
-import PrimaryAppBar from './PrimaryAppBar'
-import Drawer from './Drawer'
-import { useTheme } from '@mui/material/styles'
+import { Box, CssBaseline } from '@mui/material';
+import PrimaryAppBar from './PrimaryAppBar';
+import Drawer from './Drawer';
+import { useTheme } from '@mui/material/styles';
 const AppWrapper = ({ children }: { children: React.ReactNode }) => {
-    const theme = useTheme()
+    const theme = useTheme();
     return (
         <Box
             sx={{
@@ -25,7 +25,7 @@ const AppWrapper = ({ children }: { children: React.ReactNode }) => {
                 {children}
             </Box>
         </Box>
-    )
-}
+    );
+};
 
-export default AppWrapper
+export default AppWrapper;

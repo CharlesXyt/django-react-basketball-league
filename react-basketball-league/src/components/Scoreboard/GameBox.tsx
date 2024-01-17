@@ -1,7 +1,9 @@
-import { Box, Typography } from '@mui/material'
-import TeamCard from './TeamCard'
+import { Box, Typography } from '@mui/material';
+import TeamCard from './TeamCard';
+import { useTheme } from '@mui/material/styles';
 
 const GameBox = ({ game }: { game: any }) => {
+    const theme = useTheme();
     return (
         <Box sx={{ width: '100%' }}>
             <Box
@@ -10,7 +12,7 @@ const GameBox = ({ game }: { game: any }) => {
                     minWidth: '800px',
                     justifyContent: 'space-between',
                     alignItems: 'center',
-                    padding: '20px',
+                    padding: theme.spacing(2),
                 }}
             >
                 <Box>
@@ -22,7 +24,7 @@ const GameBox = ({ game }: { game: any }) => {
                 </Box>
             </Box>
         </Box>
-    )
-}
+    );
+};
 
-export default GameBox
+export default GameBox;

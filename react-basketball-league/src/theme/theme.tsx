@@ -1,26 +1,27 @@
-import { createTheme } from '@mui/material'
+import { createTheme } from '@mui/material';
 
 declare module '@mui/material/styles' {
     interface Theme {
         primaryAppBar: {
-            height: number
-        }
+            height: number;
+        };
         draw: {
-            width: number
-        }
+            width: number;
+        };
     }
     interface ThemeOptions {
         primaryAppBar: {
-            height: number
-        }
+            height: number;
+        };
         draw: {
-            width: number
-        }
+            width: number;
+        };
     }
 }
 
 export const createMuiTheme = () => {
     let theme = createTheme({
+        spacing: 10,
         primaryAppBar: {
             height: 50,
         },
@@ -35,6 +36,6 @@ export const createMuiTheme = () => {
                 },
             },
         },
-    })
-    return theme
-}
+    });
+    return theme;
+};

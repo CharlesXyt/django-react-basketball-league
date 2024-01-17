@@ -8,25 +8,25 @@ import {
     Toolbar,
     Typography,
     useMediaQuery,
-} from '@mui/material'
-import { useTheme } from '@mui/material/styles'
-import MenuIcon from '@mui/icons-material/Menu'
-import { useEffect, useState } from 'react'
-import { useAuthServiceContext } from '../../context/AuthContext'
-import Menu from '../../components/Menu'
+} from '@mui/material';
+import { useTheme } from '@mui/material/styles';
+import MenuIcon from '@mui/icons-material/Menu';
+import { useEffect, useState } from 'react';
+import { useAuthServiceContext } from '../../context/AuthContext';
+import Menu from '../../components/Menu';
 
 const PrimaryAppBar = () => {
-    const theme = useTheme()
-    const [sideMenu, setSideMenu] = useState(false)
-    const { logout } = useAuthServiceContext()
+    const theme = useTheme();
+    const [sideMenu, setSideMenu] = useState(false);
+    const { logout } = useAuthServiceContext();
 
-    const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'))
+    const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
     useEffect(() => {
         if (!isSmallScreen && sideMenu) {
-            setSideMenu(false)
+            setSideMenu(false);
         }
-    }, [isSmallScreen])
+    }, [isSmallScreen]);
 
     return (
         <AppBar
@@ -103,7 +103,7 @@ const PrimaryAppBar = () => {
                 </Box>
             </Toolbar>
         </AppBar>
-    )
-}
+    );
+};
 
-export default PrimaryAppBar
+export default PrimaryAppBar;

@@ -1,44 +1,46 @@
-import { useLocation } from 'react-router-dom'
-import { useAuthServiceContext } from '../context/AuthContext'
-import { Box, Paper, Typography } from '@mui/material'
-import { TeamDetail } from '../types/UserProfile'
-import { useEffect, useState } from 'react'
-import useAxiosWithInterceptor from '../helpers/jwtinterceptors'
-import { API_BASE_URL } from '../config'
-import LoadingSpinner from '../components/LoadingSpinner'
-import UserInfo from '../components/Scoreboard/UserInfo'
-import AppWrapper from './templates/AppWrapper'
-import { UserRoleEnum } from '../Enums/enum'
+import { useLocation } from 'react-router-dom';
+import { useAuthServiceContext } from '../context/AuthContext';
+import { Box, Paper, Typography } from '@mui/material';
+import { TeamDetail } from '../types/UserProfile';
+import { useEffect, useState } from 'react';
+import useAxiosWithInterceptor from '../helpers/jwtinterceptors';
+import { API_BASE_URL } from '../config';
+import LoadingSpinner from '../components/LoadingSpinner';
+import UserInfo from '../components/Scoreboard/UserInfo';
+import AppWrapper from './templates/AppWrapper';
+import { UserRoleEnum } from '../Enums/enum';
+import { useTheme } from '@mui/material/styles';
 
 const TeamDetailPage = () => {
-    const location = useLocation()
-    const jwtAxios = useAxiosWithInterceptor()
-    const [isLoading, setIsLoading] = useState(false)
-    const [teamDetail, setTeamDetail] = useState<TeamDetail | null>(null)
-    const { userProfile } = useAuthServiceContext()
+    const theme = useTheme();
+    const location = useLocation();
+    const jwtAxios = useAxiosWithInterceptor();
+    const [isLoading, setIsLoading] = useState(false);
+    const [teamDetail, setTeamDetail] = useState<TeamDetail | null>(null);
+    const { userProfile } = useAuthServiceContext();
 
-    let teamId = location.state.teamId ?? userProfile?.team?.id
+    let teamId = location.state.teamId ?? userProfile?.team?.id;
 
     useEffect(() => {
         const getTeamDetail = async () => {
             try {
-                setIsLoading(true)
+                setIsLoading(true);
                 const response = await jwtAxios.get(
                     API_BASE_URL + `/team?team_id=${teamId}`,
                     { withCredentials: true }
-                )
-                setTeamDetail(response.data)
+                );
+                setTeamDetail(response.data);
             } catch (error) {
-                console.log(error)
+                console.log(error);
             } finally {
-                setIsLoading(false)
+                setIsLoading(false);
             }
-        }
-        if (teamId) getTeamDetail()
-    }, [teamId])
+        };
+        if (teamId) getTeamDetail();
+    }, [teamId]);
 
     if (isLoading || teamId == null || teamDetail == null) {
-        return <LoadingSpinner />
+        return <LoadingSpinner />;
     }
     return (
         <AppWrapper>
@@ -48,9 +50,8 @@ const TeamDetailPage = () => {
                 </Typography>
                 <Paper
                     sx={{
-                        width: '100%',
-                        margin: '20px',
-                        padding: '20px',
+                        margin: theme.spacing(2),
+                        padding: theme.spacing(2),
                         height: '200px',
                     }}
                 >
@@ -69,22 +70,24 @@ const TeamDetailPage = () => {
                 </Typography>
                 <Box
                     sx={{
-                        margin: '20px',
+                        margin: theme.spacing(2),
                         display: 'flex',
                         flexWrap: 'wrap',
-                        rowGap: '30px',
+                        rowGap: theme.spacing(3),
                         justifyContent: 'space-between',
                     }}
                 >
                     {teamDetail.members
-                        ?.filter((member) => member.role.name !== UserRoleEnum.Coach)
+                        ?.filter(
+                            (member) => member.role.name !== UserRoleEnum.Coach
+                        )
                         .map((memberData) => (
                             <UserInfo key={memberData.name} user={memberData} />
                         ))}
                 </Box>
             </Box>
         </AppWrapper>
-    )
-}
+    );
+};
 
-export default TeamDetailPage
+export default TeamDetailPage;
