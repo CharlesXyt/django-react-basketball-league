@@ -1,4 +1,4 @@
-import { Route, BrowserRouter, Routes } from 'react-router-dom'
+import { Route, BrowserRouter, Routes, Navigate } from 'react-router-dom'
 import Profile from './pages/Profile'
 import { ThemeProvider } from '@emotion/react'
 import { createMuiTheme } from './theme/theme'
@@ -40,6 +40,7 @@ const App: React.FC = () => {
                                 </ProtectedRoute>
                             }
                         />
+                        <Route path="*" element={<Navigate to="/" replace />} />
                     </Routes>
                 </ThemeProvider>
             </AuthServiceProvider>
