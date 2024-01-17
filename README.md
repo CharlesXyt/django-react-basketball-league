@@ -28,10 +28,10 @@ This project requires Python to be installed, and it specifically requires a ver
     python manage.py runserver
 ```
 
-## Backend Setup Before Running
+## Backend Setup
 
-Before starting the backend, it would require run script to import fake data.
-Below command will recreate games, coaches, players and league admin.
+If the database is empty, then before starting the backend, it would require to run script to import fake data.
+Below command will recreate games, coaches, players and league admin, and default password for users is 12345
 
 ```bash
     python create_fake_data.py
@@ -43,4 +43,4 @@ League Admin Username:adam40
 Coach Username:carla93_team_coach
 Player Username:kevinhoover
 ```
-Password is 12345 for all users.
+Above is the current valid users in sqlite database file, and all fake users' password is 12345.
