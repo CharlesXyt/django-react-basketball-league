@@ -25,6 +25,7 @@ This project requires Python to be installed, and it specifically requires a ver
     source venv/bin/activate
     pip install -r requirements.txt
     cd basketball-league
+    python manage.py migrate
     python manage.py runserver
 ```
 
@@ -34,6 +35,7 @@ If the database is empty, then before starting the backend, it would require to 
 Below command will recreate games, coaches, players and league admin, and default password for users is 12345
 
 ```bash
+    python manage.py migrate
     python create_fake_data.py
 ```
 After successfully running the above command, there will be usernames in stdout like below
