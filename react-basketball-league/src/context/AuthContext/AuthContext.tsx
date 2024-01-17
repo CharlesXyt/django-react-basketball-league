@@ -1,8 +1,8 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { API_BASE_URL } from '../config';
-import { AuthServiceProps } from '../types/AuthService';
+import { API_BASE_URL } from '../../config';
+import { AuthServiceProps } from '../../types/AuthService';
 import axios from 'axios';
-import { UserDetailData } from '../types/UserProfile';
+import { UserDetailData } from '../../types/UserProfile';
 
 const AuthServiceContext = createContext<AuthServiceProps | null>(null);
 const AuthServiceProvider = (props: React.PropsWithChildren) => {
@@ -18,16 +18,18 @@ const AuthServiceProvider = (props: React.PropsWithChildren) => {
 
     const login = async (username: string, password: string) => {
         try {
-            await axios.post(
+            const response = await axios.post(
                 API_BASE_URL + '/token',
                 { username, password },
                 { withCredentials: true }
             );
             localStorage.setItem('isLoggedIn', 'true');
             setIsLoggedIn(true);
-        } catch (error) {
+            return response.status
+        } catch (error: any) {
             setIsLoggedIn(false);
             console.log(error);
+            return error.response.status;
         }
     };
 

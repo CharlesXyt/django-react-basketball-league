@@ -7,7 +7,7 @@ import {
 } from '@mui/material';
 import { Link } from 'react-router-dom';
 
-const Menu = () => {
+export const Menu = () => {
     const menu = [
         {
             name: 'ScoreBoard',
@@ -50,5 +50,3 @@ const Menu = () => {
         </List>
     );
 };
-
-export default Menu;

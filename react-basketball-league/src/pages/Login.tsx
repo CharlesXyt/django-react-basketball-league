@@ -1,7 +1,7 @@
 import { Box, Button, Container, TextField, Typography } from '@mui/material';
 import { useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
-import { useAuthServiceContext } from '../context/AuthContext';
+import { useAuthServiceContext } from '../context/AuthContext/AuthContext';
 
 const Login = () => {
     const { login } = useAuthServiceContext();
@@ -25,7 +25,6 @@ const Login = () => {
             const { username, password } = values;
             const status = await login(username, password);
             if (status === 401) {
-                console.log('Unauthorised');
                 formik.setErrors({
                     username: 'Invalid username or password',
                     password: 'Invalid username or password',

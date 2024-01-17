@@ -2,7 +2,7 @@ import { Avatar, Card, Typography } from '@mui/material';
 import { UserDetailData } from '../../types/UserProfile';
 import { useNavigate } from 'react-router-dom';
 import { UserRoleEnum } from '../../Enums/enum';
-import { useAuthServiceContext } from '../../context/AuthContext';
+import { useAuthServiceContext } from '../../context/AuthContext/AuthContext';
 import { useTheme } from '@mui/material/styles';
 
 const UserInfo: React.FC<{ user: UserDetailData }> = ({ user }) => {

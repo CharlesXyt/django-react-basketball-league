@@ -1,5 +1,5 @@
 import { Card, Typography } from '@mui/material';
-import { useAuthServiceContext } from '../../context/AuthContext';
+import { useAuthServiceContext } from '../../context/AuthContext/AuthContext';
 import { TeamScoreInfo } from '../../types/Match';
 import { UserRoleEnum } from '../../Enums/enum';
 import { useNavigate } from 'react-router-dom';
@@ -14,7 +14,6 @@ const TeamCard = ({ teamScoreDetail }: { teamScoreDetail: TeamScoreInfo }) => {
     const navigate = useNavigate();
 
     const handleClick = () => {
-        setAlert(false);
         if (!userProfile) {
             setAlert(true);
             return;
@@ -34,7 +33,13 @@ const TeamCard = ({ teamScoreDetail }: { teamScoreDetail: TeamScoreInfo }) => {
 
     return (
         <>
-            {alert && <Notification message="Team Detail Access Denied" />}
+            <Notification
+                onClose={() => {
+                    setAlert(false);
+                }}
+                showNotification={alert}
+                message="Team Detail Access Denied"
+            />
             <Card
                 sx={{
                     textAlign: 'center',

@@ -1,21 +1,21 @@
-import AppWrapper from './templates/AppWrapper';
 import LoadingSpinner from '../components/LoadingSpinner';
-import { useAuthServiceContext } from '../context/AuthContext';
+import { useAuthServiceContext } from '../context/AuthContext/AuthContext';
 import { Avatar, Box, Card, Typography } from '@mui/material';
 import { useLocation } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
+import { AppLayout } from '../components/AppLayout';
 
 const Profile = () => {
     const theme = useTheme();
     const { userProfile } = useAuthServiceContext();
     const location = useLocation();
 
-    let userInfo = location.state?.userProfile ?? userProfile;
+    const userInfo = location.state?.userProfile ?? userProfile;
 
     if (userInfo == null) return <LoadingSpinner />;
 
     return (
-        <AppWrapper>
+        <AppLayout>
             <Box
                 sx={{
                     display: 'flex',
@@ -68,7 +68,8 @@ const Profile = () => {
                     )}
                 </Card>
             </Box>
-        </AppWrapper>
+        </AppLayout>
+
     );
 };
 

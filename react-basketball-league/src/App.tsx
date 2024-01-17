@@ -3,7 +3,7 @@ import Profile from './pages/Profile';
 import { ThemeProvider } from '@emotion/react';
 import { createMuiTheme } from './theme/theme';
 import Login from './pages/Login';
-import { AuthServiceProvider } from './context/AuthContext';
+import { AuthServiceProvider } from './context/AuthContext/AuthContext';
 import ProtectedRoute from './services/ProtectedRoute';
 import ScoreDashboard from './pages/Scoreboard';
 import TeamDetail from './pages/TeamDetail';

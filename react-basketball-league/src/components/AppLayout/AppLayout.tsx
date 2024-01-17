@@ -1,8 +1,10 @@
 import { Box, CssBaseline } from '@mui/material';
-import PrimaryAppBar from './PrimaryAppBar';
-import Drawer from './Drawer';
 import { useTheme } from '@mui/material/styles';
-const AppWrapper = ({ children }: { children: React.ReactNode }) => {
+import { AppHeader } from './AppHeader';
+import { Drawer } from './Drawer';
+import { Menu } from './Menu';
+
+export const AppLayout = ({ children }: { children: React.ReactNode }) => {
     const theme = useTheme();
     return (
         <Box
@@ -11,8 +13,10 @@ const AppWrapper = ({ children }: { children: React.ReactNode }) => {
             }}
         >
             <CssBaseline />
-            <PrimaryAppBar />
-            <Drawer />
+            <AppHeader />
+            <Drawer>
+                <Menu />
+            </Drawer>
             <Box
                 sx={{
                     display: 'flex',
@@ -27,5 +31,3 @@ const AppWrapper = ({ children }: { children: React.ReactNode }) => {
         </Box>
     );
 };
-
-export default AppWrapper;

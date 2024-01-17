@@ -1,7 +1,7 @@
 import axios, { AxiosInstance } from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { API_BASE_URL } from '../config';
-import { useAuthServiceContext } from '../context/AuthContext';
+import { useAuthServiceContext } from '../context/AuthContext/AuthContext';
 import camelcaseKeys from 'camelcase-keys';
 
 const useAxiosWithInterceptor = (): AxiosInstance => {

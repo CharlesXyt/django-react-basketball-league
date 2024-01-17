@@ -1,8 +1,7 @@
 import { useTheme } from '@mui/material/styles';
 import { Box } from '@mui/material';
-import Menu from '../../components/Menu';
 
-const Drawer = () => {
+export const Drawer = ({ children }: { children: React.ReactNode }) => {
     const theme = useTheme();
     return (
         <Box
@@ -17,9 +16,7 @@ const Drawer = () => {
                 },
             }}
         >
-            <Menu />
+            {children}
         </Box>
     );
 };
-
-export default Drawer;

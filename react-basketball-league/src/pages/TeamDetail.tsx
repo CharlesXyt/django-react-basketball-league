@@ -1,5 +1,5 @@
 import { useLocation } from 'react-router-dom';
-import { useAuthServiceContext } from '../context/AuthContext';
+import { useAuthServiceContext } from '../context/AuthContext/AuthContext';
 import { Box, Paper, Typography } from '@mui/material';
 import { TeamDetail } from '../types/UserProfile';
 import { useEffect, useState } from 'react';
@@ -7,9 +7,9 @@ import useAxiosWithInterceptor from '../helpers/jwtinterceptors';
 import { API_BASE_URL } from '../config';
 import LoadingSpinner from '../components/LoadingSpinner';
 import UserInfo from '../components/Scoreboard/UserInfo';
-import AppWrapper from './templates/AppWrapper';
 import { UserRoleEnum } from '../Enums/enum';
 import { useTheme } from '@mui/material/styles';
+import { AppLayout } from '../components/AppLayout';
 
 const TeamDetailPage = () => {
     const theme = useTheme();
@@ -19,7 +19,7 @@ const TeamDetailPage = () => {
     const [teamDetail, setTeamDetail] = useState<TeamDetail | null>(null);
     const { userProfile } = useAuthServiceContext();
 
-    let teamId = location.state.teamId ?? userProfile?.team?.id;
+    const teamId = location.state.teamId ?? userProfile?.team?.id;
 
     useEffect(() => {
         const getTeamDetail = async () => {
@@ -43,7 +43,7 @@ const TeamDetailPage = () => {
         return <LoadingSpinner />;
     }
     return (
-        <AppWrapper>
+        <AppLayout>
             <Box sx={{ display: 'flex', flexDirection: 'column', mt: '30px' }}>
                 <Typography variant="h5" textAlign={'center'} gutterBottom>
                     Team Detail
@@ -86,7 +86,7 @@ const TeamDetailPage = () => {
                         ))}
                 </Box>
             </Box>
-        </AppWrapper>
+        </AppLayout>
     );
 };
 

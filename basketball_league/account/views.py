@@ -3,13 +3,16 @@ from rest_framework.exceptions import PermissionDenied
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework_simplejwt.views import (TokenObtainPairView,
-                                            TokenRefreshView)
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 from .models import Account, Role, Team
 from .permissions import IsCoachOrLeagueAdmin
-from .serializers import (AccountSerializer, CustomTokenObtainPairSerializer,
-                          JWTCookieTokenRefreshSerializer, TeamSerializer)
+from .serializers import (
+    AccountSerializer,
+    CustomTokenObtainPairSerializer,
+    JWTCookieTokenRefreshSerializer,
+    TeamSerializer,
+)
 
 # Create your views here.
 
@@ -75,8 +78,7 @@ class JWTSetCookieMixin:
                 httponly=True,
                 samesite=settings.SIMPLE_JWT["JWT_COOKIE_SAMESITE"],
             )
-
-        del response.data["access"]
+            del response.data["access"]
 
         return super().finalize_response(request, response, *args, **kwargs)
 

@@ -12,10 +12,10 @@ import {
 import { useTheme } from '@mui/material/styles';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useEffect, useState } from 'react';
-import { useAuthServiceContext } from '../../context/AuthContext';
-import Menu from '../../components/Menu';
+import { useAuthServiceContext } from '../../../context/AuthContext/AuthContext';
+import { Menu } from '../Menu';
 
-const PrimaryAppBar = () => {
+export const AppHeader = () => {
     const theme = useTheme();
     const [sideMenu, setSideMenu] = useState(false);
     const { logout } = useAuthServiceContext();
@@ -105,5 +105,3 @@ const PrimaryAppBar = () => {
         </AppBar>
     );
 };
-
-export default PrimaryAppBar;

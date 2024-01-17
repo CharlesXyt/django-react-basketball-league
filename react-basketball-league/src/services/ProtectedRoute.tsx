@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useAuthServiceContext } from '../context/AuthContext';
+import { useAuthServiceContext } from '../context/AuthContext/AuthContext';
 import { useNavigate } from 'react-router-dom';
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
@@ -10,7 +10,7 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
         if (!isLoggedIn) {
             navigate('/login');
         }
-    }, [isLoggedIn]);
+    }, [isLoggedIn, navigate]);
 
     return <>{children}</>;
 };
