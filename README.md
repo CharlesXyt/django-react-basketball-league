@@ -31,14 +31,16 @@ This project requires Python to be installed, and it specifically requires a ver
 ## Backend Setup Before Running
 
 Before starting the backend, it would require run script to import fake data.
-Below command will import games, coaches, players and league admin.
+Below command will recreate games, coaches, players and league admin.
 
 ```bash
     python create_fake_data.py
 ```
-Here is the league admin information which can be used to login app in frontend.
-
-league admin: 
-    username: league_admin
-    password: 12345
-
+After successfully running the above command, there will be usernames in stdout like below
+```
+(venv) python create_fake_data.py
+League Admin Username:adam40
+Coach Username:carla93_team_coach
+Player Username:kevinhoover
+```
+Password is 12345 for all users.
