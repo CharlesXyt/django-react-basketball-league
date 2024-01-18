@@ -60,6 +60,16 @@ class TeamView(APIView):
         return Response(serializer.data)
 
 
+class LogOutAPIView(APIView):
+    def post(self, request, format=None):
+        response = Response("Logged out successfully")
+
+        response.set_cookie("refresh_token", "", expires=0)
+        response.set_cookie("access_token", "", expires=0)
+
+        return response
+
+
 class JWTSetCookieMixin:
     def finalize_response(self, request, response, *args, **kwargs):
         if response.data.get("refresh"):

@@ -33,9 +33,18 @@ const AuthServiceProvider = (props: React.PropsWithChildren) => {
         }
     };
 
-    const logout = () => {
+    const logout = async () => {
         localStorage.removeItem('isLoggedIn');
         setIsLoggedIn(false);
+
+        try {
+            await axios.post(
+                `${API_BASE_URL}/logout`, {}, { withCredentials: true }
+            )
+        } catch (refreshError) {
+            console.log(refreshError);
+        }
+
     };
 
     useEffect(() => {
