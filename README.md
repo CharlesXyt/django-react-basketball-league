@@ -41,8 +41,8 @@ Below command will recreate games, coaches, players and league admin, and defaul
 After successfully running the above command, there will be usernames in stdout like below
 ```
 (venv) python create_fake_data.py
-League Admin Username:adam40
-Coach Username:carla93_team_coach
-Player Username:kevinhoover
+League Admin Username:benjamin36
+Coach Username:scotthector_team_coach
+Player Username:sue18
 ```
 Above is the current valid users in sqlite database file, and all fake users' password is 12345.

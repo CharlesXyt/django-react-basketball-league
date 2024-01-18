@@ -14,10 +14,11 @@ def create_fake_team_users(fake):
     Team.objects.all().delete()
     Game.objects.all().delete()
 
+    league_admin_username = fake.user_name()
     league_admin = Account.objects.create(
-        username=fake.user_name(),
-        name=fake.user_name(),
-        email=fake.user_name() + "@email.com",
+        username=league_admin_username,
+        name=league_admin_username,
+        email=league_admin_username + "@email.com",
         role=league_admin_role,
     )
     league_admin.set_password("12345")
